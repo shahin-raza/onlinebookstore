@@ -1,45 +1,45 @@
 <?php
-session_start();
-if (isset($_SESSION['user_id']) && ($_SESSION['user_id']=='admin')) {
-	include 'nav_admin.php';
-}else{
-    header("Location: index.php");
-  }
+	session_start();
+	if (isset($_SESSION['user_id'])) {
+		include 'nav_admin.php';
+		} else{
+				header("Location: index.php");
+			}
 
-if(isset($_POST['add'])) {
-				
-$name       = $_POST['name'];
-$author     = $_POST['author'];
-$language   = $_POST['language'];
-$publisher  = $_POST['publisher'];
-$category   = $_POST['category'];
-$price 	    = $_POST['price'];
-$db_path    = $_FILES['imagefile']['name'];
-$uploaddir  = "/var/www/onlinebookstore/book_img/";
-$oldumask   = umask(0);
-$uploadfile = $uploaddir . basename($_FILES["imagefile"]["name"]);
-move_uploaded_file($_FILES['imagefile']['tmp_name'], $uploadfile);
-umask($oldumask);
+		if(isset($_POST['add'])) {
+						
+			$name       = $_POST['name'];
+			$author     = $_POST['author'];
+			$language   = $_POST['language'];
+			$publisher  = $_POST['publisher'];
+			$category   = $_POST['category'];
+			$price 	    = $_POST['price'];
+			$db_path    = $_FILES['imagefile']['name'];
+			$uploaddir  = "/var/www/onlinebookstore/book_img/";
+			$oldumask   = umask(0);
+			$uploadfile = $uploaddir . basename($_FILES["imagefile"]["name"]);
+			move_uploaded_file($_FILES['imagefile']['tmp_name'], $uploadfile);
+			umask($oldumask);
 
-if(!empty($name) && !empty($author) && !empty($language)) {
-	require('db.php');
-	$query = "INSERT INTO books(book_name,book_author,book_language,book_publisher,book_category,book_price,book_img) VALUES ('$name','$author','$language','$publisher','$category',$price,'$db_path')";
-	$conn->query($sql);
-	$result = mysqli_query($conn, $query);
-}
-if(empty($result)) {
-	echo "Can't add new data " . mysqli_error($conn);
-	exit;
-} else {
-	 header('Location: admin_view.php');
-  }
-}
+			if(!empty($name) && !empty($author) && !empty($language)) {
+				require('db.php');
+				$query = "INSERT INTO books(book_name,book_author,book_language,book_publisher,book_category,book_price,book_img) VALUES ('$name','$author','$language','$publisher','$category',$price,'$db_path')";
+				$conn->query($sql);
+				$result = mysqli_query($conn, $query);
+			}
+			if(empty($result)) {
+				echo "Can't add new data " . mysqli_error($conn);
+				exit;
+			} else {
+				 header('Location: admin_view.php');
+				}
+	}
 	
-require('db.php');
-$sql1 = "SELECT * FROM categories";
-$result1 = $conn->query($sql1);
+	require('db.php');
+	$sql1 = "SELECT * FROM categories";
+	$result1 = $conn->query($sql1);
 
-?>
+	?>
 <div class="container">
 <form method="post" action="" enctype="multipart/form-data">
 	<table class="table">
@@ -70,7 +70,7 @@ $result1 = $conn->query($sql1);
 				</td>
 		</tr>
 		<tr>
-			<th>Price</th>
+			<th>Price(&#8377)</th>
 			<td><input type="text" name="price" required></td>
 		</tr>
 		<tr>
@@ -78,7 +78,7 @@ $result1 = $conn->query($sql1);
 			<td><input type="file" name="imagefile"></td>
 		</tr>
 	</table>
-	<input type="submit" name="add" value="Add new book" class="btn btn-primary">
-	<input type="reset" value="cancel" form action="admin_view.php" class="btn btn-default">
+	<input type="submit" name="add" value="Save" class="btn btn-primary">
+	<input type="reset" value="Cancel" onclick="history.back()" class="btn btn-default">
 </form>
 </div>

@@ -1,0 +1,38 @@
+function cart(x) {
+    
+    var javascriptVariable = x;
+		window.location.href = "cart.php?bid=" + javascriptVariable;
+		 
+		var node = document.createElement("LI");
+    var textnode = document.createTextNode("1 item is added to cart");
+    node.appendChild(textnode);
+    document.getElementById("cartm").appendChild(node);
+}
+function addToCart(productId){
+     
+            $.ajax({
+                   type: "POST",
+                    url: "cart.php?bid="+productId,
+//                contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        var string="";
+                        
+                         if(data == null){
+                            window.location="CustomerLoginForm.action";
+                         }
+                         if(data == 1){
+                             string="Product was added successfully check in your cart";
+                         }
+                         if(data == 0){
+                             string="Limit of 4 exceeded";
+                         }
+                         $("#success").html(string);
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+    
+                });
+    
+ }

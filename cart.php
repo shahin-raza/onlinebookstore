@@ -20,7 +20,6 @@
       if ($result1->num_rows > 0) {
         $sql2 = "INSERT INTO cart_data (cart_id, book_id, quantity) VALUES (".$cart_id['cart_id'].",$bookid,1)";
         $result2 =$conn->query($sql2);
-        //~ echo $sql2; exit;
       }
       else {
         $sql2 = "INSERT INTO cart(user_id,status) VALUES ($uid,0)";
@@ -31,13 +30,9 @@
         $cart_id3 = $result3->fetch_assoc();
         $sql4 = "INSERT INTO cart_data (cart_id, book_id, quantity) VALUES (".$cart_id3['cart_id'].",$bookid,1)";
         $result4 =$conn->query($sql4);
-
       }
-      //~ print_r($result);exit;
-        //~ $sql2 = "INSERT INTO cart(user_id,book_id,quantity) VALUES ($uid,$bookid,1)";
-        //~ $conn->query($sql2);
-        //~ $sql3 = "INSERT INTO cart_data (book_id, quantity) VALUES ($bookid,1) where ";
-        //~ $conn->query($sql3);
-      header('Location: cart_view.php');
+      session_start();
+			$_SESSION['x'] =  1;
+      header("Location: view_book.php?");
     }
 ?>
