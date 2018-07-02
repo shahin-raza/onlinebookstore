@@ -35,23 +35,27 @@
   $i = 1;
 
   if(!empty ($bid)) {
-    echo "<table>
+    	echo "<div class='book_container'>
     <form action='update_cart.php?cart_id=$cart_id' method='POST'>";
     while($row = $results->fetch_assoc()) {
+			echo "<div class='book_img'>";
       #echo "<tr><td><tr><img src='http://192.168.2.126/onlinebookstore/book_img/{$row['book_img']}' width='100px' height='150px'></tr>";
-      echo "<tr><td><tr><img src='http://localhost/onlinebookstore/book_img/{$row['book_img']}' width='100px' height='150px'></tr>";
-      echo "<tr>".$row['book_name']."</tr>";
-      echo "<tr>".$row['book_price']."</tr><tr><a href='remove_cart.php?cid=$cart_id && bid=".$row['book_id']."'role='button'>Remove</a></tr></td></tr>";
+      echo "<img src='http://localhost/onlinebookstore/book_img/{$row['book_img']}' width='190px' height='170px'>";
+      echo 	$row['book_name'];
+      echo "<br> Price : &#8377 ".$row['book_price']."<br><a href='remove_cart.php?cid=$cart_id && bid=".$row['book_id']."'role='button'>Remove</a><br>";
       echo "
             Quantity :
-            <input type='number' name=".$row['book_id']." min='1' max='50'>";
+            <input type='number' name=".$row['book_id']." value='1' min='1' max='50'>";
               $i++;
+                echo "</div>";
     }
-    echo "<input type='submit'></form>
-          </table>";
+    echo "</div>";
+    echo "<input type='submit' value='Buy now' class='buy'></form>";
+         
   }
   else {
     echo"your cart is empty";
   }
-include('footer.php');
+ 
+//~ include('footer.php');
 ?>

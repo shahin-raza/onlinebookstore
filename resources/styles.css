@@ -79,7 +79,7 @@ span.psw {
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
-    span.psw {
+    span.password {
        display: block;
        float: none;
     }
@@ -87,3 +87,40 @@ span.psw {
        width: 100%;
     }
 }
+
+span.checkout {
+    margin-left: 80%;
+}
+
+.error {
+  color: red;
+}
+
+.buy{
+  margin-top: 250px;
+}
+
+.address{
+  background-color: beige;
+}
+
+.amount{
+	color:black;
+}
+
+.foo {
+  color:green;
+}
+.foo1{
+	color:red;	
+}
+.foo2{
+	color:green;
+	text-align: center;	
+}
+.tab, tab.th, tab.td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+

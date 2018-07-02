@@ -12,10 +12,10 @@
 	while($row = $results->fetch_assoc()) {
 		$bookid=$row['book_id'];
 		echo "<div class='book_img'>";
-		#echo "<img src='http://192.168.2.126/onlinebookstore/book_img/{$row['book_img']}' width='190px' height='180px'><br>";
 		echo "<img src='http://localhost/onlinebookstore/book_img/{$row['book_img']}' width='190px' height='180px'><br>";
+		#echo "<img src='http://localhost/onlinebookstore/book_img/{$row['book_img']}' width='190px' height='180px'><br>";
 		echo $row['book_name'];
-		echo "<br> Price : Rs.".$row['book_price']."<br><button type='button' class='btn btn-info'><a href='cart.php?bid=$bookid'role='button'>Buy Now</a></button>";
+		echo "<br> Price : Rs.".$row['book_price']."<br><button type='button' class='btn btn-info'><a href='cart.php?bid=$bookid'role='button'>Add to Cart</a></button>";
 		echo "</div>";
 	}
 	echo "</div>";
